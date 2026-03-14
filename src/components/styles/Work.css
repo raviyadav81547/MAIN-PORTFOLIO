@@ -1,0 +1,176 @@
+.work-section {
+  padding: 120px 60px;
+}
+
+.work-heading {
+  font-family: 'Geist', sans-serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  color: #fff;
+  margin: 8px 0 60px;
+  overflow: hidden;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Card */
+.work-card {
+  position: relative;
+  border-radius: 16px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.work-card-inner {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(196, 129, 255, 0.1);
+  transition: border-color 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.work-card:hover .work-card-inner {
+  border-color: rgba(196, 129, 255, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(196, 129, 255, 0.08);
+}
+
+/* Spotlight follows cursor */
+.work-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: background 0.1s;
+  border-radius: 16px;
+}
+
+/* Image */
+.work-img-wrap {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a0d26, #0d0017);
+}
+.work-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.3s ease;
+}
+.work-card:hover .work-img {
+  transform: scale(1.06);
+  filter: brightness(1.1);
+}
+
+.work-card-body {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.work-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Geist', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.work-card-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+}
+
+.work-card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.work-tech-tag {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: rgba(196, 129, 255, 0.1);
+  color: rgba(196, 129, 255, 0.8);
+  border: 1px solid rgba(196, 129, 255, 0.2);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.work-card-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(196, 129, 255, 0.8);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+  transition: color 0.2s;
+}
+.work-card-link:hover { color: #c481ff; }
+
+/* Google TV spinning neon border */
+.work-card-border {
+  position: absolute;
+  inset: -2px;
+  border-radius: 18px;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    #c481ff, #e879f9, #ffffff, #9333ea, #c481ff
+  );
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.work-card:hover .work-card-border {
+  opacity: 1;
+  animation: spinBorder 2s linear infinite;
+}
+
+@keyframes spinBorder {
+  from { --angle: 0deg; }
+  to { --angle: 360deg; }
+}
+
+/* Noise texture over cards */
+.work-card-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 150px;
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 3;
+  border-radius: 16px;
+}
+
+@media (max-width: 900px) {
+  .work-grid { grid-template-columns: repeat(2, 1fr); }
+  .work-section { padding: 80px 24px; }
+}
+@media (max-width: 600px) {
+  .work-grid { grid-template-columns: 1fr; }
+}

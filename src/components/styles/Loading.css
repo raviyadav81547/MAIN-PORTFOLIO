@@ -1,0 +1,90 @@
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}
+
+.loading-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c481ff, transparent);
+  border-radius: 1px;
+  opacity: 0;
+  transform-origin: center;
+  scale: 0 1;
+  overflow: hidden;
+  transition: border-radius 0.35s, height 0.35s, background 0.1s;
+}
+
+/* After morph: the line becomes a capsule */
+.loading-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(196, 129, 255, 0.6);
+  background: rgba(11, 8, 12, 0.95);
+}
+
+.loading-capsule-inner {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.loading-name {
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 100;
+  color: #fff;
+  letter-spacing: 0.35em;
+  transition: font-weight 0.05s linear;
+  white-space: nowrap;
+  text-shadow: 0 0 20px rgba(196, 129, 255, 0.7);
+}
+
+.loading-progress-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(196, 129, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #9333ea, #c481ff, #e879f9);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(196, 129, 255, 0.8);
+  transition: none;
+}
+
+.loading-counter {
+  font-family: 'Geist', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(196, 129, 255, 0.8);
+  letter-spacing: 0.2em;
+}
+
+.loading-shards {
+  display: none;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10000;
+  overflow: hidden;
+}
